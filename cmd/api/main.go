@@ -184,25 +184,19 @@ func serveHTTP(fd int, idx *index.Index, bufPool *sync.Pool) {
 	for {
 		n, err := syscall.Read(fd, buf)
 		if err != nil {
-			log.Printf("read fd=%d: %v", fd, err)
 			return
 		}
 		if n == 0 {
-			log.Printf("read fd=%d: EOF (0 bytes)", fd)
 			return
 		}
 
-		log.Printf("read fd=%d: %d bytes", fd, n)
 		data := buf[:n]
 		for {
 			method, path, body, bytesRead := rinhttp.ParseRequest(data)
 			if method == "" {
-				// Incomplete request — need more data.  Break to the
-				// outer loop so we call Read again.
 				break
 			}
 
-			log.Printf("parsed request: %s %s (body=%d bytes)", method, path, len(body))
 			switch {
 			case method == "GET" && path == "/ready":
 				writeAll(fd, rinhttp.ReadyResponse)
@@ -210,17 +204,13 @@ func serveHTTP(fd int, idx *index.Index, bufPool *sync.Pool) {
 			case method == "POST" && path == "/fraud-score":
 				vec, err := vector.Normalize(body)
 				if err != nil {
-					log.Printf("normalize error: %v", err)
 					writeAll(fd, badRequestResp())
 					return
 				}
 				fc := idx.Search(&vec)
-				log.Printf("fraud_count=%d", fc)
 				writeAll(fd, rinhttp.FraudResponses[fc])
 
 			default:
-				// Unknown method/path — close the connection.
-				log.Printf("unknown request: %s %s", method, path)
 				return
 			}
 
