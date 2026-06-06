@@ -1,5 +1,6 @@
 services:
   lb:
+    platform: linux/amd64
     build:
       context: .
       dockerfile: Dockerfile.builder
@@ -19,6 +20,7 @@ services:
       - INSTANCE=
 
   api1:
+    platform: linux/amd64
     build:
       context: .
       dockerfile: Dockerfile.builder
@@ -38,6 +40,7 @@ services:
       - GOMEMLIMIT=160MiB
 
   api2:
+    platform: linux/amd64
     build:
       context: .
       dockerfile: Dockerfile.builder
