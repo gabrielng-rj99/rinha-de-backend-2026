@@ -8,8 +8,8 @@ import (
 )
 
 const (
-	DefaultNPROBE   = 28
-	LargeNPROBE     = 112
+	DefaultNPROBE   = 32
+	LargeNPROBE     = 128
 	EarlyExitThresh = 0
 )
 
