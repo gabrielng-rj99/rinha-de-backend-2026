@@ -31,3 +31,10 @@ Thumbs.db
 
 # Build reports
 report.md
+
+# Temp/cache
+.tmp/
+gotmp/
+tmp/
+# Test results (generated)
+test/results.json
