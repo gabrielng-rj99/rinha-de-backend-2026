@@ -9,7 +9,7 @@ import (
 
 const (
 	DefaultNPROBE   = 28
-	LargeNPROBE     = 96
+	LargeNPROBE     = 32
 	EarlyExitThresh = 0
 )
 
