@@ -70,12 +70,14 @@ func ExtractStringSlice(jsonData []byte, path string) []string {
 }
 
 // IsNull returns true when the value at the given key path is the JSON
-// literal null.  It returns false if the key is not found or the value is
-// anything else (object, string, number, bool, array).
+// literal null OR the key is absent from the payload entirely.
+//
+// This matches Normalize's semantics: both absent and null produce a nil
+// pointer in the Go struct, so FastNormalize must treat them identically.
 func IsNull(jsonData []byte, path string) bool {
 	val := locateValue(jsonData, path)
 	if val == nil {
-		return false
+		return true // key absent → treat as null
 	}
 	return isNullLiteral(val)
 }

@@ -202,7 +202,7 @@ func serveHTTP(fd int, idx *index.Index, bufPool *sync.Pool) {
 				writeAll(fd, rinhttp.ReadyResponse)
 
 			case method == "POST" && path == "/fraud-score":
-				vec, err := vector.Normalize(body)
+				vec, err := vector.FastNormalize(body)
 				if err != nil {
 					writeAll(fd, badRequestResp())
 					return

@@ -69,7 +69,7 @@ func main() {
 
 	for i, entry := range td.Entries {
 		// Normalize: vector.Normalize takes []byte (raw JSON).
-		vec, err := vector.Normalize([]byte(entry.Request))
+		vec, err := vector.FastNormalize([]byte(entry.Request))
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "entry %d: normalize error: %v\n", i, err)
 			discrepancies = append(discrepancies, discrepancy{
