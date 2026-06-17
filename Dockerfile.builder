@@ -1,6 +1,7 @@
 FROM golang:1.22-alpine AS builder
+RUN apk add --no-cache git
+RUN git clone --depth 1 --branch main https://github.com/gabrielng-rj99/rinha-de-backend-2026.git /app
 WORKDIR /app
-COPY . .
 RUN go build -o /bin/builder ./cmd/builder
 RUN go build -o /bin/api ./cmd/api
 RUN go build -o /bin/lb ./cmd/lb
