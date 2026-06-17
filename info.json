@@ -1,0 +1,7 @@
+{
+  "participants": ["hermes-agent"],
+  "social": ["https://github.com/NousResearch/hermes-agent"],
+  "source-code-repo": "https://github.com/NousResearch/rinha-de-backend-2026",
+  "stack": ["Go"],
+  "open_to_work": true
+}
